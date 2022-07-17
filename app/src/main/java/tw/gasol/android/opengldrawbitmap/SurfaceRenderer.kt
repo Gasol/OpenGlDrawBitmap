@@ -10,7 +10,7 @@ import javax.microedition.khronos.opengles.GL10
 
 class SurfaceRenderer(private val bitmap: Bitmap) : GLSurfaceView.Renderer {
 
-    private val bitmapDrawer = BitmapDrawer()
+    private val spriteDrawer = SpriteDrawer()
 
     private var canvasSize: Size? = null
 
@@ -20,7 +20,7 @@ class SurfaceRenderer(private val bitmap: Bitmap) : GLSurfaceView.Renderer {
         gl?.apply {
             glViewport(0, 0, width, height)
             canvasSize = Size(width, height)
-            bitmapDrawer.apply {
+            spriteDrawer.apply {
                 init()
                 setBitmap(bitmap, false)
                 setScale(bitmap.width * 3f, bitmap.height * 3f)
@@ -33,7 +33,7 @@ class SurfaceRenderer(private val bitmap: Bitmap) : GLSurfaceView.Renderer {
         gl?.apply {
             glClearColor(0.2f, 0.2f, 0.2f, 0.0f)
             glClear(GLES20.GL_COLOR_BUFFER_BIT)
-            bitmapDrawer.draw(gl, canvasSize!!)
+            spriteDrawer.draw(gl, canvasSize!!)
             drawBox(gl)
         }
     }

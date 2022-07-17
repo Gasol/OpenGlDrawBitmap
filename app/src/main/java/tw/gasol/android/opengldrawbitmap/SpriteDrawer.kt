@@ -11,7 +11,7 @@ import tw.gasol.android.grafika.gles.Sprite2d
 import tw.gasol.android.grafika.gles.Texture2dProgram
 import javax.microedition.khronos.opengles.GL10
 
-class BitmapDrawer(private var bitmap: Bitmap? = null) : Drawer {
+class SpriteDrawer(private var bitmap: Bitmap? = null) : Drawer {
     private val projectionMatrix = FloatArray(16)
     private var canvasSize: Size? = null
 
