@@ -59,22 +59,26 @@ class SurfaceRenderer(private val bitmap: Bitmap) : GLSurfaceView.Renderer {
 
     private fun drawBitmap(gl: GL10) {
         GlUtil.checkGlError("drawBitmap start")
-        gl.apply {
-            glEnable(GLES20.GL_BLEND)
+        gl.use(GLES20.GL_BLEND) {
             glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA)
             sprite2d!!.draw(texProgram, displayMatrix)
-            glDisable(GLES20.GL_BLEND)
         }
         GlUtil.checkGlError("drawBitmap end")
     }
 
     private fun drawBox(gl: GL10) {
-        gl.apply {
-            glEnable(GLES20.GL_SCISSOR_TEST)
+        gl.use(GLES20.GL_SCISSOR_TEST) {
             glScissor(0, 0, 100, 100)
             glClearColor(1.0f, 0.0f, 0.0f, 1.0f)
             glClear(GLES20.GL_COLOR_BUFFER_BIT)
-            glDisable(GLES20.GL_SCISSOR_TEST)
         }
     }
+}
+
+fun GL10.use(feature: Int, block: GL10.() -> Unit) {
+    glEnable(feature)
+    GlUtil.checkGlError("glEnable $feature")
+    block()
+    glDisable(feature)
+    GlUtil.checkGlError("glDisable $feature")
 }
