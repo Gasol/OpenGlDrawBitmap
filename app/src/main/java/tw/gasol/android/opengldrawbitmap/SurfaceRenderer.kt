@@ -60,7 +60,10 @@ class SurfaceRenderer(private val bitmap: Bitmap) : GLSurfaceView.Renderer {
     private fun drawBitmap(gl: GL10) {
         GlUtil.checkGlError("drawBitmap start")
         gl.apply {
+            glEnable(GLES20.GL_BLEND)
+            glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA)
             sprite2d!!.draw(texProgram, displayMatrix)
+            glDisable(GLES20.GL_BLEND)
         }
         GlUtil.checkGlError("drawBitmap end")
     }
