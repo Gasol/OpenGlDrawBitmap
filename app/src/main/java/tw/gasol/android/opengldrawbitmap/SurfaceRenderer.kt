@@ -42,7 +42,7 @@ class SurfaceRenderer(private val bitmap: Bitmap) : GLSurfaceView.Renderer {
             val drawable2d = Drawable2d(Drawable2d.Prefab.RECTANGLE)
             sprite2d = Sprite2d(drawable2d).apply {
                 setTexture(texName!!)
-                setScale(bitmap.width.toFloat(), bitmap.height.toFloat())
+                setScale(bitmap.width * 3f, bitmap.height * 3f)
                 setPosition(width / 2f, height / 2f)
             }
         }
